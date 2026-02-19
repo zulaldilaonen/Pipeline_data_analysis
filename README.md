@@ -93,12 +93,11 @@ Uncompress:
 ```bash
 gunzip *.gz
 ```
-
+Build HISAT2 index:
 ```bash
 hisat2-build GRCh38.primary_assembly.genome.fa GRCh38_index
 ```
-Build HISAT2 index:
-```bash```
+
 This will generate files:
 ```bash
 ls
@@ -184,7 +183,7 @@ FastQC analyzes:
 
 -Sequence duplication
 
-##Step 2 – Trimming
+## Step 2 – Trimming
 
 Trimmomatic removes:
 
@@ -194,7 +193,7 @@ Trimmomatic removes:
 
 -Reads shorter than 36 bp
 
-##Step 3 – Alignment
+## Step 3 – Alignment
 
 -HISAT2 aligns cleaned reads to GRCh38 reference genome.
 
