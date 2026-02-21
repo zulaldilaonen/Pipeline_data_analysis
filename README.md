@@ -142,7 +142,15 @@ wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR145/077/SRR14513977/SRR14513977_2.f
 Return to main directory:
 ```bash
 cd ..
+```
 
+```bash
+sudo apt update
+sudo apt install trimmomatic -y
+```
+
+```bash
+trimmomatic -version
 ```
 
 # 6. Run the Pipeline
