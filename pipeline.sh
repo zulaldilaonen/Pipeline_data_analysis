@@ -28,31 +28,50 @@ REF_DIR="$BASE_DIR/reference"
 GENOME_INDEX="$REF_DIR/GRCh38_index"
 GTF="$REF_DIR/gencode.v45.annotation.gtf"
 ADAPTERS="$REF_DIR/adapters.fa"
+TRIMMOMATIC_JAR="/usr/share/java/trimmomatic.jar"
 
-# Create folders if missing
 mkdir -p $FASTQ_DIR $TRIM_DIR $ALIGN_DIR $COUNT_DIR $QC_DIR $LOG_DIR $REF_DIR
 
 echo "======================================"
 echo "Processing sample: $SAMPLE"
 echo "======================================"
 
-# Check FASTQ
-if [ ! -f "$FASTQ_DIR/${SAMPLE}_1.fastq.gz" ] || [ ! -f "$FASTQ_DIR/${SAMPLE}_2.fastq.gz" ]; then
-  echo "FASTQ files not found in $FASTQ_DIR"
-  echo "Please download them first."
+########################################
+# TOOL CHECK
+########################################
+
+for tool in fastqc multiqc hisat2 samtools featureCounts java; do
+  if ! command -v $tool &> /dev/null; then
+    echo "ERROR: $tool is not installed."
+    exit 1
+  fi
+done
+
+if [ ! -f "$TRIMMOMATIC_JAR" ]; then
+  echo "ERROR: Trimmomatic jar not found at $TRIMMOMATIC_JAR"
   exit 1
 fi
 
-# Check reference
+########################################
+# INPUT CHECK
+########################################
+
+if [ ! -f "$FASTQ_DIR/${SAMPLE}_1.fastq.gz" ] || [ ! -f "$FASTQ_DIR/${SAMPLE}_2.fastq.gz" ]; then
+  echo "ERROR: FASTQ files not found in $FASTQ_DIR"
+  exit 1
+fi
+
 if [ ! -f "$GENOME_INDEX.1.ht2" ]; then
-  echo "HISAT2 index not found in reference/"
+  echo "ERROR: HISAT2 index not found in reference/"
   exit 1
 fi
 
 ########################################
 # 1. RAW FASTQC
 ########################################
+
 echo "Running FastQC (raw)"
+
 fastqc -t $THREADS \
 $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
 $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
@@ -63,8 +82,10 @@ multiqc $QC_DIR -o $QC_DIR
 ########################################
 # 2. TRIMMOMATIC
 ########################################
+
 echo "Running Trimmomatic"
-trimmomatic PE -threads $THREADS \
+
+java -jar $TRIMMOMATIC_JAR PE -threads $THREADS \
 $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
 $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
 $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
@@ -78,7 +99,9 @@ LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 \
 ########################################
 # 3. ALIGNMENT
 ########################################
+
 echo "Running HISAT2"
+
 hisat2 -p $THREADS \
 -x $GENOME_INDEX \
 -1 $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
@@ -92,7 +115,9 @@ samtools index $ALIGN_DIR/${SAMPLE}.sorted.bam
 ########################################
 # 4. FEATURECOUNTS
 ########################################
+
 echo "Running featureCounts"
+
 featureCounts \
 -T $THREADS \
 -p -B -C \
@@ -104,10 +129,12 @@ $ALIGN_DIR/${SAMPLE}.sorted.bam \
 ########################################
 # 5. FLAGSTAT
 ########################################
+
+echo "Running samtools flagstat"
+
 samtools flagstat $ALIGN_DIR/${SAMPLE}.sorted.bam \
 > $LOG_DIR/${SAMPLE}_flagstat.txt
 
 echo "======================================"
 echo "Pipeline finished for $SAMPLE"
 echo "======================================"
-
