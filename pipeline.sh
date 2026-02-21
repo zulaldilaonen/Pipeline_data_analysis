@@ -3,7 +3,7 @@ set -e
 set -o pipefail
 
 ########################################
-# RNA-Seq Pipeline
+# RNA-Seq Pipeline (Optimized)
 # Usage: ./pipeline.sh SRRXXXXXXX
 ########################################
 
@@ -30,7 +30,7 @@ GTF="$REF_DIR/gencode.v45.annotation.gtf"
 ADAPTERS="$REF_DIR/adapters.fa"
 TRIMMOMATIC_JAR="/usr/share/java/trimmomatic.jar"
 
-mkdir -p $FASTQ_DIR $TRIM_DIR $ALIGN_DIR $COUNT_DIR $QC_DIR $LOG_DIR $REF_DIR
+mkdir -p $FASTQ_DIR $TRIM_DIR $ALIGN_DIR $COUNT_DIR $QC_DIR $LOG_DIR
 
 echo "======================================"
 echo "Processing sample: $SAMPLE"
@@ -71,7 +71,6 @@ fi
 ########################################
 
 echo "Running FastQC (raw)"
-
 fastqc -t $THREADS \
 $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
 $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
@@ -97,15 +96,16 @@ LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 \
 2>&1 | tee $LOG_DIR/${SAMPLE}_trimmomatic.log
 
 ########################################
-# 3. ALIGNMENT
+# 3. ALIGNMENT (HISAT2 optimized)
 ########################################
 
-echo "Running HISAT2"
+echo "Running HISAT2 (-k 1 to reduce multimapping)"
 
 hisat2 -p $THREADS \
 -x $GENOME_INDEX \
 -1 $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
 -2 $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
+-k 1 \
 --summary-file $LOG_DIR/${SAMPLE}_hisat2_summary.txt \
 2> $LOG_DIR/${SAMPLE}_hisat2.log \
 | samtools sort -@ $THREADS -o $ALIGN_DIR/${SAMPLE}.sorted.bam
@@ -120,7 +120,7 @@ echo "Running featureCounts"
 
 featureCounts \
 -T $THREADS \
--p -B -C \
+-p --countReadPairs -B -C \
 -a $GTF \
 -o $COUNT_DIR/${SAMPLE}_counts.txt \
 $ALIGN_DIR/${SAMPLE}.sorted.bam \
