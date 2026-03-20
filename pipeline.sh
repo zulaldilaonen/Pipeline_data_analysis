@@ -154,7 +154,7 @@ samtools flagstat $ALIGN_DIR/${SAMPLE}.sorted.bam \
 ########################################
 # 7. CLEANUP
 ########################################
-exit 0 # test için erken çıkış
+# exit 0 # test için erken çıkış
 
 echo "Cleaning up trimmed files: $TRIM_DIR/${SAMPLE}_*"
 rm -f $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
