@@ -233,3 +233,18 @@ Lower values may indicate:
 -Strand mis-specification
 
 -Low input quality
+
+
+---
+
+
+Notes:
+
+- if you run long process, you should use `screen` command
+
+ screen -S #session-name // yeni bir session oluşturur
+ screen -list // sessionları listeler
+ screen -d -r // listedeki bir sessionun içine girmek için 
+
+ - if you want to run one sample to analyze, you must run pipeline.sh
+ - if you want to run all of sample to analyze, you must run run_all_sample.sh
