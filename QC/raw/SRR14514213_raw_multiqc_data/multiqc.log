@@ -1,0 +1,24 @@
+[2026-03-21 23:40:33,857] multiqc                                            [DEBUG  ]  This is MultiQC v1.18
+[2026-03-21 23:40:33,857] multiqc                                            [DEBUG  ]  Command used: /usr/bin/multiqc /home/talhaaygen/Pipeline_data_analysis/QC/raw -o /home/talhaaygen/Pipeline_data_analysis/QC/raw --filename SRR14514213_raw_multiqc
+[2026-03-21 23:40:34,409] multiqc                                            [WARNING]  MultiQC Version v1.33 now available!
+[2026-03-21 23:40:34,410] multiqc                                            [DEBUG  ]  Working dir : /home/talhaaygen/Pipeline_data_analysis
+[2026-03-21 23:40:34,410] multiqc                                            [DEBUG  ]  Template    : default
+[2026-03-21 23:40:34,410] multiqc                                            [DEBUG  ]  Running Python 3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]
+[2026-03-21 23:40:34,410] multiqc                                            [DEBUG  ]  Analysing modules: custom_content, ccs, ngsderive, purple, conpair, lima, peddy, somalier, methylQA, mosdepth, phantompeakqualtools, qualimap, preseq, hifiasm, quast, qorts, rna_seqc, rockhopper, rsem, rseqc, busco, bustools, goleft_indexcov, gffcompare, disambiguate, supernova, deeptools, sargasso, verifybamid, mirtrace, happy, mirtop, sambamba, gopeaks, homer, hops, macs2, theta2, snpeff, gatk, htseq, bcftools, featureCounts, fgbio, dragen, dragen_fastqc, dedup, pbmarkdup, damageprofiler, mapdamage, biobambam2, jcvi, mtnucratio, picard, vep, bakta, prokka, qc3C, nanostat, samblaster, samtools, sexdeterrmine, seqera_cli, eigenstratdatabasetools, bamtools, jellyfish, vcftools, longranger, stacks, varscan2, snippy, umitools, truvari, bbmap, bismark, biscuit, diamond, hicexplorer, hicup, hicpro, salmon, kallisto, slamdunk, star, hisat2, tophat, bowtie2, bowtie1, cellranger, snpsplit, odgi, pangolin, nextclade, freyja, humid, kat, leehom, librarian, adapterRemoval, bbduk, clipandmerge, cutadapt, flexbar, sourmash, kaiju, bracken, kraken, malt, motus, trimmomatic, sickle, skewer, sortmerna, biobloomtools, fastq_screen, afterqc, fastp, fastqc, filtlong, prinseqplusplus, pychopper, porechop, pycoqc, minionqc, anglerfish, multivcfanalyzer, clusterflow, checkqc, bcl2fastq, bclconvert, interop, ivar, flash, seqyclean, optitype, whatshap, xenome, xengsort
+[2026-03-21 23:40:34,410] multiqc                                            [DEBUG  ]  Using temporary directory for creating report: /tmp/tmpe9sqfcnk
+[2026-03-21 23:40:34,411] multiqc                                            [INFO   ]  Search path : /home/talhaaygen/Pipeline_data_analysis/QC/raw
+[2026-03-21 23:40:37,515] multiqc                                            [DEBUG  ]  Summary of files that were skipped by the search: [skipped_module_specific_max_filesize: 3048] // [skipped_no_match: 431] // [skipped_ignore_pattern: 52]
+[2026-03-21 23:40:37,798] multiqc.plots.bargraph                             [DEBUG  ]  Using matplotlib version 3.6.3
+[2026-03-21 23:40:37,798] multiqc.plots.linegraph                            [DEBUG  ]  Using matplotlib version 3.6.3
+[2026-03-21 23:40:37,799] multiqc                                            [DEBUG  ]  No samples found: custom_content
+[2026-03-21 23:40:37,836] multiqc                                            [DEBUG  ]  No samples found: htseq
+[2026-03-21 23:40:37,847] multiqc                                            [DEBUG  ]  No samples found: snippy
+[2026-03-21 23:40:49,846] multiqc.modules.fastqc.fastqc                      [INFO   ]  Found 106 reports
+[2026-03-21 23:40:54,910] multiqc.utils.software_versions                    [DEBUG  ]  Reading software versions from config.software_versions
+[2026-03-21 23:40:54,991] multiqc                                            [DEBUG  ]  Compressing plot data
+[2026-03-21 23:40:55,014] multiqc                                            [INFO   ]  Report      : QC/raw/SRR14514213_raw_multiqc.html
+[2026-03-21 23:40:55,014] multiqc                                            [INFO   ]  Data        : QC/raw/SRR14514213_raw_multiqc_data
+[2026-03-21 23:40:55,014] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpe9sqfcnk/multiqc_data' to '/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514213_raw_multiqc_data'
+[2026-03-21 23:40:55,016] multiqc                                            [DEBUG  ]  Full report path: /home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514213_raw_multiqc.html
+[2026-03-21 23:40:55,037] multiqc                                            [ERROR  ]  Could not include file 'assets/js/packages/jszip.min.js': [Errno 2] No such file or directory: '/tmp/tmpe9sqfcnk/assets/js/packages/jszip.min.js'
+[2026-03-21 23:40:55,088] multiqc                                            [INFO   ]  MultiQC complete

@@ -1,0 +1,11 @@
+Module	Section	Sample Name	Source
+Snippy	snippy	multiqc_sources	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514162_raw_multiqc_data/multiqc_sources.txt
+Snippy	snippy	multiqc	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514161_raw_multiqc_data/multiqc.log
+FastQC	all_sections	SRR14514162_2	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514162_2_fastqc.zip
+FastQC	all_sections	SRR14514164_2	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514164_2_fastqc.zip
+FastQC	all_sections	SRR14514161_2	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514161_2_fastqc.zip
+FastQC	all_sections	SRR14514162_1	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514162_1_fastqc.zip
+FastQC	all_sections	SRR14514163_1	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514163_1_fastqc.zip
+FastQC	all_sections	SRR14514161_1	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514161_1_fastqc.zip
+FastQC	all_sections	SRR14514163_2	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514163_2_fastqc.zip
+FastQC	all_sections	SRR14514164_1	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514164_1_fastqc.zip

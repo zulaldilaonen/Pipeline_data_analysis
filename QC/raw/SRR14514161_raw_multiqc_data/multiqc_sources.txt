@@ -1,0 +1,3 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SRR14514161_2	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514161_2_fastqc.zip
+FastQC	all_sections	SRR14514161_1	/home/talhaaygen/Pipeline_data_analysis/QC/raw/SRR14514161_1_fastqc.zip

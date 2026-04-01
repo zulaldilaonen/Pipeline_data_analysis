@@ -1,29 +1,202 @@
+# #!/bin/bash
+# set -e
+# set -o pipefail
+
+# ########################################
+# # RNA-Seq Pipeline (Optimized)
+# # Usage: ./pipeline.sh SRRXXXXXXX
+# ########################################
+
+# if [ -z "$1" ]; then
+#   echo "Usage: ./pipeline.sh SRRXXXXXXX"
+#   exit 1
+# fi
+
+# SAMPLE=$1
+# THREADS=8
+
+# BASE_DIR=$(pwd)
+
+# FASTQ_DIR="$BASE_DIR/fastq"
+# TRIM_DIR="$BASE_DIR/trimmed"
+# ALIGN_DIR="$BASE_DIR/alignment"
+# COUNT_DIR="$BASE_DIR/counts"
+# QC_DIR="$BASE_DIR/QC"
+# QC_RAW_DIR="$BASE_DIR/QC/raw"
+# QC_TRIM_DIR="$BASE_DIR/QC/trimmed"
+# LOG_DIR="$BASE_DIR/logs"
+# REF_DIR="$BASE_DIR/reference"
+
+# GENOME_INDEX="$REF_DIR/GRCh38_index"
+# GTF="$REF_DIR/gencode.v45.annotation.gtf"
+# ADAPTERS="$REF_DIR/adapters.fa"
+# TRIMMOMATIC_JAR="/usr/share/java/trimmomatic.jar"
+
+# mkdir -p $FASTQ_DIR $TRIM_DIR $ALIGN_DIR $COUNT_DIR $QC_RAW_DIR $QC_TRIM_DIR $LOG_DIR
+
+# echo "======================================"
+# echo "Processing sample: $SAMPLE"
+# echo "======================================"
+
+# ########################################
+# # TOOL CHECK
+# ########################################
+
+# # apt install fastqc multiqc hisat2 samtools -y 
+# # featureCounts java
+# for tool in fastqc multiqc hisat2 samtools featureCounts java; do
+#   if ! command -v $tool &> /dev/null; then
+#     echo "ERROR: $tool is not installed."
+#     exit 1
+#   fi
+# done
+
+# if [ ! -f "$TRIMMOMATIC_JAR" ]; then
+#   echo "ERROR: Trimmomatic jar not found at $TRIMMOMATIC_JAR"
+#   exit 1
+# fi
+
+# ########################################
+# # INPUT CHECK
+# ########################################
+
+# if [ ! -f "$FASTQ_DIR/${SAMPLE}_1.fastq.gz" ] || [ ! -f "$FASTQ_DIR/${SAMPLE}_2.fastq.gz" ]; then
+#   echo "ERROR: FASTQ files not found in $FASTQ_DIR"
+#   exit 1
+# fi
+
+# if [ ! -f "$GENOME_INDEX.1.ht2" ]; then
+#   echo "ERROR: HISAT2 index not found in reference/"
+#   exit 1
+# fi
+
+# ########################################
+# # 1. RAW FASTQC
+# ########################################
+
+# echo "Running FastQC (raw)"
+# fastqc -t $THREADS \
+#   $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
+#   $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
+#   -o $QC_RAW_DIR
+
+# multiqc $QC_RAW_DIR -o $QC_RAW_DIR --filename ${SAMPLE}_raw_multiqc
+
+# ########################################
+# # 2. TRIMMOMATIC
+# ########################################
+
+# echo "Running Trimmomatic"
+
+# java -jar $TRIMMOMATIC_JAR PE -threads $THREADS \
+#   $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
+#   $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
+#   $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
+#   $TRIM_DIR/${SAMPLE}_1.unpaired.fastq.gz \
+#   $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
+#   $TRIM_DIR/${SAMPLE}_2.unpaired.fastq.gz \
+#   ILLUMINACLIP:$ADAPTERS:2:30:10 \
+#   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 \
+#   2>&1 | tee $LOG_DIR/${SAMPLE}_trimmomatic.log
+
+# ########################################
+# # 3. POST-TRIM FASTQC
+# ########################################
+
+# echo "Running FastQC (trimmed)"
+# fastqc -t $THREADS \
+#   $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
+#   $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
+#   -o $QC_TRIM_DIR
+
+# multiqc $QC_TRIM_DIR -o $QC_TRIM_DIR --filename ${SAMPLE}_trimmed_multiqc
+
+# ########################################
+# # 4. ALIGNMENT (HISAT2 optimized)
+# ########################################
+
+# echo "Running HISAT2 (-k 1 to reduce multimapping)"
+
+# hisat2 -p $THREADS \
+#   -x $GENOME_INDEX \
+#   -1 $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
+#   -2 $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
+#   -k 1 \
+#   --summary-file $LOG_DIR/${SAMPLE}_hisat2_summary.txt \
+#   2> $LOG_DIR/${SAMPLE}_hisat2.log \
+#   | samtools sort -@ $THREADS -o $ALIGN_DIR/${SAMPLE}.sorted.bam
+
+# samtools index $ALIGN_DIR/${SAMPLE}.sorted.bam
+
+# ########################################
+# # 5. FEATURECOUNTS
+# ########################################
+
+# echo "Running featureCounts"
+
+# featureCounts \
+#   -T $THREADS \
+#   -p --countReadPairs -B -C \
+#   -a $GTF \
+#   -o $COUNT_DIR/${SAMPLE}_counts.txt \
+#   $ALIGN_DIR/${SAMPLE}.sorted.bam \
+#   2>&1 | tee $LOG_DIR/${SAMPLE}_featurecounts.log
+
+# ########################################
+# # 6. FLAGSTAT
+# ########################################
+
+# echo "Running samtools flagstat"
+
+# samtools flagstat $ALIGN_DIR/${SAMPLE}.sorted.bam \
+#   > $LOG_DIR/${SAMPLE}_flagstat.txt
+
+# ########################################
+# # 7. CLEANUP
+# ########################################
+# # exit 0 # test için erken çıkış
+
+# echo "Cleaning up trimmed files: $TRIM_DIR/${SAMPLE}_*"
+# rm -f $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
+#       $TRIM_DIR/${SAMPLE}_1.unpaired.fastq.gz \
+#       $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
+#       $TRIM_DIR/${SAMPLE}_2.unpaired.fastq.gz
+
+# echo "Cleaning up BAM files: $ALIGN_DIR/${SAMPLE}.*"
+# rm -f $ALIGN_DIR/${SAMPLE}.sorted.bam \
+#       $ALIGN_DIR/${SAMPLE}.sorted.bam.bai
+
+# echo "======================================"
+# echo "Pipeline finished for $SAMPLE"
+# echo "======================================"
+
+
+
 #!/bin/bash
-set -e
-set -o pipefail
+set -euo pipefail
 
 ########################################
-# RNA-Seq Pipeline (Optimized)
+# RNA-Seq Pipeline
 # Usage: ./pipeline.sh SRRXXXXXXX
 ########################################
 
-if [ -z "$1" ]; then
+if [ $# -lt 1 ]; then
   echo "Usage: ./pipeline.sh SRRXXXXXXX"
   exit 1
 fi
 
-SAMPLE=$1
-THREADS=8
+SAMPLE="$1"
+THREADS="${THREADS:-8}"
 
-BASE_DIR=$(pwd)
+BASE_DIR="$(pwd)"
 
 FASTQ_DIR="$BASE_DIR/fastq"
 TRIM_DIR="$BASE_DIR/trimmed"
 ALIGN_DIR="$BASE_DIR/alignment"
 COUNT_DIR="$BASE_DIR/counts"
 QC_DIR="$BASE_DIR/QC"
-QC_RAW_DIR="$BASE_DIR/QC/raw"
-QC_TRIM_DIR="$BASE_DIR/QC/trimmed"
+QC_RAW_DIR="$QC_DIR/raw"
+QC_TRIM_DIR="$QC_DIR/trimmed"
 LOG_DIR="$BASE_DIR/logs"
 REF_DIR="$BASE_DIR/reference"
 
@@ -32,20 +205,21 @@ GTF="$REF_DIR/gencode.v45.annotation.gtf"
 ADAPTERS="$REF_DIR/adapters.fa"
 TRIMMOMATIC_JAR="/usr/share/java/trimmomatic.jar"
 
-mkdir -p $FASTQ_DIR $TRIM_DIR $ALIGN_DIR $COUNT_DIR $QC_RAW_DIR $QC_TRIM_DIR $LOG_DIR
+trap 'echo "ERROR: Pipeline failed for sample: $SAMPLE"' ERR
+
+mkdir -p "$FASTQ_DIR" "$TRIM_DIR" "$ALIGN_DIR" "$COUNT_DIR" "$QC_RAW_DIR" "$QC_TRIM_DIR" "$LOG_DIR"
 
 echo "======================================"
 echo "Processing sample: $SAMPLE"
+echo "Threads: $THREADS"
 echo "======================================"
 
 ########################################
 # TOOL CHECK
 ########################################
 
-# apt install fastqc multiqc hisat2 samtools -y 
-# featureCounts java
 for tool in fastqc multiqc hisat2 samtools featureCounts java; do
-  if ! command -v $tool &> /dev/null; then
+  if ! command -v "$tool" >/dev/null 2>&1; then
     echo "ERROR: $tool is not installed."
     exit 1
   fi
@@ -66,7 +240,17 @@ if [ ! -f "$FASTQ_DIR/${SAMPLE}_1.fastq.gz" ] || [ ! -f "$FASTQ_DIR/${SAMPLE}_2.
 fi
 
 if [ ! -f "$GENOME_INDEX.1.ht2" ]; then
-  echo "ERROR: HISAT2 index not found in reference/"
+  echo "ERROR: HISAT2 index not found: $GENOME_INDEX.*.ht2"
+  exit 1
+fi
+
+if [ ! -f "$GTF" ]; then
+  echo "ERROR: GTF file not found: $GTF"
+  exit 1
+fi
+
+if [ ! -f "$ADAPTERS" ]; then
+  echo "ERROR: Adapters file not found: $ADAPTERS"
   exit 1
 fi
 
@@ -75,96 +259,95 @@ fi
 ########################################
 
 echo "Running FastQC (raw)"
-fastqc -t $THREADS \
-  $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
-  $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
-  -o $QC_RAW_DIR
+fastqc -t "$THREADS" \
+  "$FASTQ_DIR/${SAMPLE}_1.fastq.gz" \
+  "$FASTQ_DIR/${SAMPLE}_2.fastq.gz" \
+  -o "$QC_RAW_DIR"
 
-multiqc $QC_RAW_DIR -o $QC_RAW_DIR --filename ${SAMPLE}_raw_multiqc
+echo "Running MultiQC (raw)"
+multiqc "$QC_RAW_DIR" -o "$QC_RAW_DIR" --filename "${SAMPLE}_raw_multiqc"
 
 ########################################
 # 2. TRIMMOMATIC
 ########################################
 
 echo "Running Trimmomatic"
-
-java -jar $TRIMMOMATIC_JAR PE -threads $THREADS \
-  $FASTQ_DIR/${SAMPLE}_1.fastq.gz \
-  $FASTQ_DIR/${SAMPLE}_2.fastq.gz \
-  $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
-  $TRIM_DIR/${SAMPLE}_1.unpaired.fastq.gz \
-  $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
-  $TRIM_DIR/${SAMPLE}_2.unpaired.fastq.gz \
-  ILLUMINACLIP:$ADAPTERS:2:30:10 \
+java -jar "$TRIMMOMATIC_JAR" PE -threads "$THREADS" \
+  "$FASTQ_DIR/${SAMPLE}_1.fastq.gz" \
+  "$FASTQ_DIR/${SAMPLE}_2.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_1.unpaired.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_2.unpaired.fastq.gz" \
+  ILLUMINACLIP:"$ADAPTERS":2:30:10 \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 \
-  2>&1 | tee $LOG_DIR/${SAMPLE}_trimmomatic.log
+  2>&1 | tee "$LOG_DIR/${SAMPLE}_trimmomatic.log"
 
 ########################################
 # 3. POST-TRIM FASTQC
 ########################################
 
 echo "Running FastQC (trimmed)"
-fastqc -t $THREADS \
-  $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
-  $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
-  -o $QC_TRIM_DIR
+fastqc -t "$THREADS" \
+  "$TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz" \
+  -o "$QC_TRIM_DIR"
 
-multiqc $QC_TRIM_DIR -o $QC_TRIM_DIR --filename ${SAMPLE}_trimmed_multiqc
+echo "Running MultiQC (trimmed)"
+multiqc "$QC_TRIM_DIR" -o "$QC_TRIM_DIR" --filename "${SAMPLE}_trimmed_multiqc"
 
 ########################################
-# 4. ALIGNMENT (HISAT2 optimized)
+# 4. ALIGNMENT
 ########################################
 
-echo "Running HISAT2 (-k 1 to reduce multimapping)"
-
-hisat2 -p $THREADS \
-  -x $GENOME_INDEX \
-  -1 $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
-  -2 $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
+echo "Running HISAT2 (-k 1)"
+hisat2 -p "$THREADS" \
+  -x "$GENOME_INDEX" \
+  -1 "$TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz" \
+  -2 "$TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz" \
   -k 1 \
-  --summary-file $LOG_DIR/${SAMPLE}_hisat2_summary.txt \
-  2> $LOG_DIR/${SAMPLE}_hisat2.log \
-  | samtools sort -@ $THREADS -o $ALIGN_DIR/${SAMPLE}.sorted.bam
+  --summary-file "$LOG_DIR/${SAMPLE}_hisat2_summary.txt" \
+  2> "$LOG_DIR/${SAMPLE}_hisat2.log" \
+  | samtools sort -@ "$THREADS" -o "$ALIGN_DIR/${SAMPLE}.sorted.bam"
 
-samtools index $ALIGN_DIR/${SAMPLE}.sorted.bam
+samtools index "$ALIGN_DIR/${SAMPLE}.sorted.bam"
 
 ########################################
 # 5. FEATURECOUNTS
 ########################################
 
 echo "Running featureCounts"
-
 featureCounts \
-  -T $THREADS \
+  -T "$THREADS" \
   -p --countReadPairs -B -C \
-  -a $GTF \
-  -o $COUNT_DIR/${SAMPLE}_counts.txt \
-  $ALIGN_DIR/${SAMPLE}.sorted.bam \
-  2>&1 | tee $LOG_DIR/${SAMPLE}_featurecounts.log
+  -a "$GTF" \
+  -o "$COUNT_DIR/${SAMPLE}_counts.txt" \
+  "$ALIGN_DIR/${SAMPLE}.sorted.bam" \
+  2>&1 | tee "$LOG_DIR/${SAMPLE}_featurecounts.log"
 
 ########################################
 # 6. FLAGSTAT
 ########################################
 
 echo "Running samtools flagstat"
-
-samtools flagstat $ALIGN_DIR/${SAMPLE}.sorted.bam \
-  > $LOG_DIR/${SAMPLE}_flagstat.txt
+samtools flagstat "$ALIGN_DIR/${SAMPLE}.sorted.bam" \
+  > "$LOG_DIR/${SAMPLE}_flagstat.txt"
 
 ########################################
 # 7. CLEANUP
 ########################################
-# exit 0 # test için erken çıkış
 
-echo "Cleaning up trimmed files: $TRIM_DIR/${SAMPLE}_*"
-rm -f $TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz \
-      $TRIM_DIR/${SAMPLE}_1.unpaired.fastq.gz \
-      $TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz \
-      $TRIM_DIR/${SAMPLE}_2.unpaired.fastq.gz
+echo "Cleaning up trimmed files"
+rm -f \
+  "$TRIM_DIR/${SAMPLE}_1.trimmed.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_1.unpaired.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz" \
+  "$TRIM_DIR/${SAMPLE}_2.unpaired.fastq.gz"
 
-echo "Cleaning up BAM files: $ALIGN_DIR/${SAMPLE}.*"
-rm -f $ALIGN_DIR/${SAMPLE}.sorted.bam \
-      $ALIGN_DIR/${SAMPLE}.sorted.bam.bai
+echo "Cleaning up BAM files"
+rm -f \
+  "$ALIGN_DIR/${SAMPLE}.sorted.bam" \
+  "$ALIGN_DIR/${SAMPLE}.sorted.bam.bai"
 
 echo "======================================"
 echo "Pipeline finished for $SAMPLE"
