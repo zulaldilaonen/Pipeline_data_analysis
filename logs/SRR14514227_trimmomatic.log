@@ -1,0 +1,8 @@
+TrimmomaticPE: Started with arguments:
+ -threads 8 /home/talhaaygen/Pipeline_data_analysis/fastq/SRR14514227_1.fastq.gz /home/talhaaygen/Pipeline_data_analysis/fastq/SRR14514227_2.fastq.gz /home/talhaaygen/Pipeline_data_analysis/trimmed/SRR14514227_1.trimmed.fastq.gz /home/talhaaygen/Pipeline_data_analysis/trimmed/SRR14514227_1.unpaired.fastq.gz /home/talhaaygen/Pipeline_data_analysis/trimmed/SRR14514227_2.trimmed.fastq.gz /home/talhaaygen/Pipeline_data_analysis/trimmed/SRR14514227_2.unpaired.fastq.gz ILLUMINACLIP:/home/talhaaygen/Pipeline_data_analysis/reference/adapters.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCA'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT'
+ILLUMINACLIP: Using 0 prefix pairs, 2 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
+Quality encoding detected as phred33
+Input Read Pairs: 27563591 Both Surviving: 26422231 (95.86%) Forward Only Surviving: 519158 (1.88%) Reverse Only Surviving: 214970 (0.78%) Dropped: 407232 (1.48%)
+TrimmomaticPE: Completed successfully

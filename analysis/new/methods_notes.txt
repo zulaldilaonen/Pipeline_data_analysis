@@ -1,0 +1,47 @@
+Methods notes — DESeq2 differential expression and visualization
+======================================================================
+
+DESeq2 version: 1.42.1
+R version:      4.3.3
+Run date:       2026-05-15 08:27:32 UTC
+
+Normalization
+  DESeq2 uses the median-of-ratios size factor normalization
+  (estimateSizeFactors). Library size and composition biases are
+  corrected by computing per-sample size factors from the geometric
+  mean of gene counts across samples.
+
+Dispersion and testing
+  Gene-wise dispersions are estimated with the Cox-Reid adjusted
+  maximum likelihood, shrunk toward a fitted mean-dispersion trend.
+  Differential expression is tested with the Wald test on the
+  shrunken dispersion estimates (default DESeq2 workflow).
+
+Multiple-testing correction
+  Adjusted p-values reported in results() use the Benjamini-Hochberg
+  procedure (pAdjustMethod = 'BH'), which is the DESeq2 default.
+
+Variance-stabilizing transformation
+  PCA and heatmap use vst(dds, blind = FALSE) to obtain homoscedastic,
+  log-scale expression values while accounting for the experimental
+  design.
+
+Significance thresholds (applied uniformly in this script)
+  Adjusted p-value (padj) cutoff: 0.05
+  log2 fold-change cutoff:        |log2FC| > 1
+  Gene classification:
+    Upregulated:   padj < 0.05 AND log2FoldChange >  1
+    Downregulated: padj < 0.05 AND log2FoldChange < -1
+    Not significant: all other genes
+
+Heatmap gene selection
+  Top 50 genes ranked by ascending padj in the FC contrast,
+  visualized on vst-transformed counts with row-wise z-score scaling.
+
+Sample ordering in heatmap
+  Samples are ordered so that Control samples are grouped on one side
+  and AD samples on the other; within each diagnosis group, samples
+  are ordered by brain region.
+
+Enrichment analysis (re-using existing CSV outputs)
+  ORA/GSEA computed previously with clusterProfiler, p.adjust = 'BH'.

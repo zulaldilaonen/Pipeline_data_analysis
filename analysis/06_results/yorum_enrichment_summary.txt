@@ -1,0 +1,7 @@
+Bu dosya, frontal cortex verisi üzerinde yapılan zenginleştirme analizinin genel özetini içerir.
+
+Analizde iki yaklaşım kullanılmıştır: ORA ve GSEA. ORA analizinde anlamlı diferansiyel eksprese genler kullanılmıştır. GSEA analizinde ise tüm genler istatistik değerlerine göre sıralanarak değerlendirilmiştir.
+
+Sonuçlar, veri setinde biyolojik olarak anlamlı sinyaller bulunduğunu göstermektedir. Özellikle mitokondriyal fonksiyon, enerji metabolizması, protein yıkımı ve nörodejenerasyonla ilişkili yolakların öne çıkması Alzheimer hastalığı açısından beklenen ve anlamlı bir bulgudur.
+
+Genel olarak bu özet dosyası, enrichment analizinin başarılı şekilde tamamlandığını ve elde edilen sonuçların Alzheimer biyolojisiyle uyumlu olduğunu göstermektedir.

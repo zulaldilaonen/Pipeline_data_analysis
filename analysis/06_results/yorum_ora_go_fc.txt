@@ -1,0 +1,9 @@
+Bu dosya ve ilişkili grafik, frontal cortex için ORA GO Biological Process analizinin sonuçlarını göstermektedir.
+
+Öne çıkan biyolojik süreçler arasında forebrain development, neuron migration, central nervous system neuron differentiation ve neuron differentiation bulunmaktadır.
+
+Bu terimler gelişimsel süreçler gibi görünse de yetişkin beyinde nöronal yapı, sinaptik organizasyon ve beyin bölgesi bütünlüğünün korunmasıyla ilişkilidir.
+
+Sonuçlar, Alzheimer hastalığında frontal cortex bölgesinde nöronal yapı, farklılaşma ve organizasyonla ilişkili genlerin etkilendiğini göstermektedir.
+
+Bu bulgu, Alzheimer’da nöronal bütünlüğün bozulması ve sinaptik fonksiyon kaybı ile uyumludur.

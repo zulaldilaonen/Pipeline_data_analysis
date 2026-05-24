@@ -1,18 +1,6 @@
 
-counts/
-logs/
-reference/*
-
-reference/*.ht2
-reference/*.fasta
-reference/*.fa
-reference/*.fai
-reference/*.gff
-reference/*.gtf
-reference/*.bed
-reference/*.dict
-reference/*.zip
-reference/*.gz
+counts
+reference
 
 __pycache__/
 *.pyc
@@ -27,3 +15,5 @@ Thumbs.db
 *.temp
 *.swp
 *~
+analysis/03_deseq2/dds.rds
+analysis/03_deseq2/dds.rds

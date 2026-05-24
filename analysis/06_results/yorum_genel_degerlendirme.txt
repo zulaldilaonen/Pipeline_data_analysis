@@ -1,0 +1,11 @@
+Genel olarak bu analiz, Alzheimer hastalığında frontal cortex bölgesinde belirgin moleküler değişiklikler olduğunu göstermektedir.
+
+DESeq2 sonuçları, Alzheimer ve kontrol grupları arasında anlamlı diferansiyel eksprese genler bulunduğunu ortaya koymuştur.
+
+PCA ve heatmap analizleri, örneklerin biyolojik gruplara göre anlamlı şekilde kümelendiğini göstermektedir.
+
+Enrichment analizleri özellikle mitokondriyal fonksiyon, ATP üretimi, oxidative phosphorylation, elektron transport zinciri, proteasome, autophagy, mitophagy ve nörodejenerasyon yolaklarının öne çıktığını göstermiştir.
+
+Bu bulgular Alzheimer hastalığında enerji metabolizması bozukluğu, protein yıkım sistemlerinde aksama, hücresel temizlik mekanizmalarının bozulması ve sinaptik fonksiyon kaybının önemli rol oynadığını desteklemektedir.
+
+Sonuç olarak pipeline başarılı şekilde çalışmış ve Alzheimer biyolojisiyle uyumlu, yorumlanabilir ve raporlanabilir sonuçlar üretmiştir.

@@ -1,0 +1,36 @@
+Figure notes — POSTER versiyonu (90 cm x 70 cm)
+======================================================================
+
+Generated:      2026-05-24 12:08:26 UTC
+DESeq2 version: 1.42.1
+R version:      4.3.3
+svglite used:   TRUE
+org.Hs.eg.db:   TRUE
+
+Output folder:  
+  yeni_figur
+
+Format
+  SVG (vektörel — posterde büyütünce piksellenmez)
+  PNG 300 dpi (yedek; print için güvence)
+
+Tipografi
+  Base font size: 24 pt
+  Volcano label fontu: ~18 pt, bold, beyaz halo
+  Heatmap satır (gen) fontu: 14 pt
+  Dotplot pathway fontu:     18 pt, str_wrap(width = 40)
+
+Threshold'lar
+  padj < 0.05 ; |log2FC| > 1
+  Volcano label sayısı: 12
+  Heatmap top gene:     50
+  Dotplot top term:     15
+
+Per-figür kayıtlar:
+  - Volcano (volcano_fc_poster): 16 up, 2 down, 28012 not significant; 12 genes labelled.
+  - Volcano (volcano_cb_poster): 0 up, 0 down, 50588 not significant; 0 genes labelled.
+  - PCA: vst(dds, blind = FALSE); 145 sample, PC1 = 85.5%, PC2 = 4.4%.
+  - Heatmap: top 50 genes by FC padj; column clustering off; samples ordered Control -> AD (by brain_region).
+  - Dotplot ora_go_fc_dotplot_poster: top 15 term gösterildi.
+  - Dotplot gsea_go_fc_dotplot_poster: top 15 term gösterildi.
+  - Dotplot gsea_kegg_fc_dotplot_poster: top 15 term gösterildi.

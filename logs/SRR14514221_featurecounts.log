@@ -1,0 +1,51 @@
+
+        ==========     _____ _    _ ____  _____  ______          _____  
+        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+	  v2.0.6
+
+//========================== featureCounts setting ===========================\\
+||                                                                            ||
+||             Input files : 1 BAM file                                       ||
+||                                                                            ||
+||                           SRR14514221.sorted.bam                           ||
+||                                                                            ||
+||             Output file : SRR14514221_counts.txt                           ||
+||                 Summary : SRR14514221_counts.txt.summary                   ||
+||              Paired-end : yes                                              ||
+||        Count read pairs : yes                                              ||
+||              Annotation : gencode.v45.annotation.gtf (GTF)                 ||
+||      Dir for temp files : /home/talhaaygen/Pipeline_data_analysis/counts   ||
+||                                                                            ||
+||                 Threads : 8                                                ||
+||                   Level : meta-feature level                               ||
+||      Multimapping reads : not counted                                      ||
+|| Multi-overlapping reads : not counted                                      ||
+||   Min overlapping bases : 1                                                ||
+||                                                                            ||
+\\============================================================================//
+
+//================================= Running ==================================\\
+||                                                                            ||
+|| Load annotation file gencode.v45.annotation.gtf ...                        ||
+||    Features : 1650704                                                      ||
+||    Meta-features : 63187                                                   ||
+||    Chromosomes/contigs : 25                                                ||
+||                                                                            ||
+|| Process BAM file SRR14514221.sorted.bam...                                 ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 23478091                                             ||
+||    Successfully assigned alignments : 8426253 (35.9%)                      ||
+||    Running time : 0.23 minutes                                             ||
+||                                                                            ||
+|| Write the final count table.                                               ||
+|| Write the read assignment summary.                                         ||
+||                                                                            ||
+|| Summary of counting results can be found in file "/home/talhaaygen/Pipeli  ||
+|| ne_data_analysis/counts/SRR14514221_counts.txt.summary"                    ||
+||                                                                            ||
+\\============================================================================//
+

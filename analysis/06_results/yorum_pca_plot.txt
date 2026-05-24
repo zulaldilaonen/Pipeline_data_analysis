@@ -1,0 +1,9 @@
+Bu PCA grafiği, örneklerin genel gen ekspresyon profillerine göre nasıl kümelendiğini göstermektedir.
+
+Grafikte örneklerin büyük ölçüde beyin bölgesine göre ayrıldığı görülmektedir. Frontal cortex ve cerebellum örnekleri farklı kümeler oluşturmuştur.
+
+Bu durum, beyin bölgesinin gen ekspresyonu üzerinde güçlü bir etkiye sahip olduğunu göstermektedir.
+
+Alzheimer ve kontrol örnekleri bazı bölgelerde kısmi ayrım göstermektedir. Bu da hastalık durumunun ekspresyon profili üzerinde etkili olduğunu, fakat en büyük varyasyon kaynağının beyin bölgesi olduğunu düşündürmektedir.
+
+PCA sonucu genel olarak veri kalitesinin iyi olduğunu ve örneklerin biyolojik beklentiye uygun şekilde kümelendiğini göstermektedir.

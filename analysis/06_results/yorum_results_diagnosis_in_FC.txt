@@ -1,0 +1,11 @@
+Bu dosya, frontal cortex örneklerinde Alzheimer hastalığı ve kontrol grupları arasında yapılan diferansiyel gen ekspresyon analizinin sonuçlarını içerir.
+
+Her gen için log2FoldChange, pvalue ve padj gibi istatistiksel değerler bulunmaktadır.
+
+log2FoldChange değeri genin Alzheimer grubunda kontrole göre artıp azaldığını gösterir. Pozitif değerler artmış ekspresyonu, negatif değerler azalmış ekspresyonu ifade eder.
+
+padj değeri çoklu test düzeltmesi yapılmış anlamlılık değeridir. Genellikle padj < 0.05 olan genler istatistiksel olarak anlamlı kabul edilir.
+
+Bu dosya, volcano plot, heatmap ve enrichment analizlerinin temel girdisini oluşturur.
+
+Frontal cortex Alzheimer patolojisinde önemli bir bölge olduğu için bu sonuçlar hastalığın moleküler etkilerini anlamak açısından kritiktir.

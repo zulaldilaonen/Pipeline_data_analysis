@@ -1,0 +1,13 @@
+Bu dosya ve grafik, frontal cortex için GSEA KEGG pathway analizinin sonuçlarını göstermektedir.
+
+Öne çıkan yolaklar arasında oxidative phosphorylation, proteasome, mitophagy, autophagy, ubiquitin mediated proteolysis, Alzheimer disease ve pathways of neurodegeneration bulunmaktadır.
+
+Oxidative phosphorylation yolunun belirgin şekilde zenginleşmesi, mitokondriyal enerji üretiminin Alzheimer patolojisinde önemli bir rol oynadığını göstermektedir.
+
+Proteasome ve ubiquitin mediated proteolysis yolaklarının öne çıkması, protein yıkımı ve yanlış katlanmış proteinlerin temizlenmesiyle ilişkili sistemlerin etkilendiğini göstermektedir. Bu durum amyloid-beta ve tau gibi protein birikimleriyle ilişkili olabilir.
+
+Mitophagy ve autophagy yolaklarının bulunması, hasarlı mitokondrilerin ve hücresel atıkların temizlenmesinde bozulma olabileceğini düşündürmektedir.
+
+Alzheimer disease ve genel neurodegeneration pathwaylerinin çıkması, analizin Alzheimer biyolojisiyle uyumlu olduğunu desteklemektedir.
+
+Genel olarak bu KEGG sonuçları, Alzheimer’da mitokondriyal disfonksiyon, protein homeostaz bozukluğu ve hücresel temizlik mekanizmalarının bozulduğunu göstermektedir.

@@ -1,0 +1,30 @@
+Metadata QC Summary
+===================
+
+Total rows in original table: 191
+Total unique samples: 191
+Number of duplicated samples: 0
+
+Missing values per column:
+sample          0
+age             0
+sex             0
+pmi             4
+brain_region    0
+diagnosis       0
+
+Value counts for sex:
+sex
+male      100
+female     91
+
+Value counts for brain_region:
+brain_region
+CB    96
+FC    95
+
+Value counts for diagnosis:
+diagnosis
+Control    96
+AD         95
+

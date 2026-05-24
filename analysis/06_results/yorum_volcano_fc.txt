@@ -1,0 +1,11 @@
+Bu grafik, frontal cortex örneklerinde Alzheimer ve kontrol grupları arasındaki diferansiyel gen ekspresyon sonuçlarını göstermektedir.
+
+X ekseni log2FoldChange değerini, Y ekseni ise -log10(padj) değerini göstermektedir.
+
+Kırmızı noktalar istatistiksel olarak anlamlı genleri temsil etmektedir.
+
+Sağ taraftaki kırmızı noktalar Alzheimer grubunda ekspresyonu artan genleri, sol taraftaki kırmızı noktalar ise ekspresyonu azalan genleri göstermektedir.
+
+Grafikte anlamlı genlerin bulunması, frontal cortex bölgesinde Alzheimer’a bağlı transkripsiyonel değişiklikler olduğunu göstermektedir.
+
+Bu sonuçlar, downstream enrichment analizleri için biyolojik olarak anlamlı gen setleri elde edildiğini desteklemektedir.

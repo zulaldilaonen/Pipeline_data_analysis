@@ -1,0 +1,25 @@
+## OS
+Description:	Ubuntu 24.04.4 LTS
+## Bash
+GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)
+## Java
+openjdk version "21.0.10" 2026-01-20
+## FastQC
+FastQC v0.12.1
+## MultiQC
+multiqc, version 1.18
+## Trimmomatic
+0.39
+## HISAT2
+/usr/bin/hisat2-align-s version 2.2.1
+## SAMtools
+samtools 1.19.2
+## featureCounts
+
+featureCounts v2.0.6
+
+## Python
+Python 3.12.3
+## pandas
+## R
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"

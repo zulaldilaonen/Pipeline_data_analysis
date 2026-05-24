@@ -1,0 +1,11 @@
+Bu dosya ve grafik, frontal cortex için GSEA GO Biological Process analizinin sonuçlarını göstermektedir.
+
+En güçlü zenginleşen süreçler ATP synthesis, mitochondrial ATP synthesis, oxidative phosphorylation, electron transport chain, cellular respiration ve aerobic respiration olarak görülmektedir.
+
+Bu sonuçlar, Alzheimer hastalığında frontal cortex bölgesinde mitokondriyal fonksiyonların ve enerji üretim sisteminin belirgin şekilde etkilendiğini göstermektedir.
+
+Mitokondriyal bozulma, ATP üretiminde azalma ve elektron transport zinciri problemleri nöronal stres, oksidatif stres ve sinaptik fonksiyon kaybına neden olabilir.
+
+Grafikte ayrıca synaptic vesicle cycle ve vesicle-mediated transport in synapse süreçlerinin de yer alması, nöronlar arası iletişimin etkilendiğini düşündürmektedir.
+
+Genel olarak bu analiz, Alzheimer hastalığında frontal cortex düzeyinde enerji metabolizması bozukluğu ve sinaptik iletişim problemlerinin önemli rol oynadığını göstermektedir.

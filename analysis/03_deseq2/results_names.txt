@@ -1,0 +1,7 @@
+Intercept
+age_centered
+sex_male_vs_female
+pmi_centered
+brain_region_FC_vs_CB
+diagnosis_AD_vs_Control
+brain_regionFC.diagnosisAD

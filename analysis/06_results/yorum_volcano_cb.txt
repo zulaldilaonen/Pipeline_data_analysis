@@ -1,0 +1,9 @@
+Bu grafik, cerebellum örneklerinde Alzheimer ve kontrol grupları arasındaki diferansiyel gen ekspresyon sonuçlarını göstermektedir.
+
+Grafikte anlamlı gen sayısının frontal cortex’e göre daha az olduğu görülmektedir.
+
+Bu durum, cerebellum bölgesinin Alzheimer hastalığındaki transkripsiyonel değişimlerden frontal cortex kadar etkilenmediğini düşündürmektedir.
+
+Bu sonuç Alzheimer patolojisinin beyin bölgelerine göre farklılık gösterdiğini destekler.
+
+Cerebellum genellikle Alzheimer’da frontal cortex ve hippocampus gibi bölgelerden daha az etkilenen bir bölge olarak değerlendirildiği için bu bulgu biyolojik olarak anlamlıdır.

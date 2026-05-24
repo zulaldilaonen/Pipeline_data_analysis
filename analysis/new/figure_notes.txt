@@ -1,0 +1,51 @@
+Figure notes — publication-ready outputs
+======================================================================
+
+Generated: 2026-05-15 08:27:54 UTC
+DESeq2 version: 1.42.1
+Significance cutoffs: padj < 0.05 ; |log2FC| > 1
+
+Volcano plots (volcano_fc_publication.*, volcano_cb_publication.*)
+  Input:  03_deseq2/results_diagnosis_in_FC.csv / 03_deseq2/results_diagnosis_in_CB.csv
+  X-axis: log2FoldChange
+  Y-axis: -log10(adjusted p-value)
+  Horizontal dashed line: -log10(padj cutoff)
+  Vertical dashed lines:  +/- log2FC cutoff
+  Genes coloured by regulation status; top genes labelled with ggrepel.
+
+PCA plot (pca_plot_publication.*)
+  Input:  03_deseq2/dds.rds
+  Transformation: vst(dds, blind = FALSE)
+  Aesthetic: colour = diagnosis, shape = brain_region
+  Axes annotated with explained variance percentage.
+
+Heatmap (heatmap_top_genes_publication.*)
+  Input:  03_deseq2/dds.rds + 03_deseq2/results_diagnosis_in_FC.csv + 00_metadata/metadata_filtered.csv
+  Gene selection: top 50 genes by ascending padj from the FC contrast
+  Values:   vst counts, row-wise z-score scaled
+  Columns:  ordered (Control -> AD), then by brain_region; clustering off
+  Rows:     hierarchically clustered
+
+Enrichment dotplots
+  Inputs: 05_enrichment/ora_go_fc.csv, 05_enrichment/gsea_go_fc.csv, 05_enrichment/gsea_kegg_fc.csv
+  Up to top 15 terms by ascending p.adjust
+  Pathway names wrapped with stringr::str_wrap (width = 45)
+  Style consistent across ORA / GSEA panels.
+
+Improvements over previous figures
+  - Threshold lines drawn on volcano plots (padj and |log2FC|).
+  - Up / Down / Not significant colour coding standardised.
+  - Gene labels added via ggrepel (no overlap, top significant only).
+  - PCA axes display percent variance explained.
+  - Heatmap samples grouped by diagnosis (Control vs AD).
+  - Dotplot pathway names wrapped, top-N restricted, font size tuned.
+  - All outputs saved as 300 dpi PNG and vector PDF.
+
+Per-figure run-time notes:
+  - Volcano (volcano_fc_publication): 16 up, 2 down, 28012 not significant; 12 genes labelled.
+  - Volcano (volcano_cb_publication): 0 up, 0 down, 50588 not significant; 0 genes labelled.
+  - PCA: vst(dds, blind = FALSE); 145 sample, PC1 = 85.5%, PC2 = 4.4%.
+  - Heatmap: top 50 genes by FC padj; column clustering disabled; samples ordered Control → AD (by brain_region within).
+  - Dotplot ora_go_fc_dotplot_publication: top 15 term gösterildi.
+  - Dotplot gsea_go_fc_dotplot_publication: top 15 term gösterildi.
+  - Dotplot gsea_kegg_fc_dotplot_publication: top 15 term gösterildi.

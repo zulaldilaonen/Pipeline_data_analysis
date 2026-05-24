@@ -1,0 +1,14 @@
+Enrichment Summary - FC
+=======================
+
+Input file: 03_deseq2/results_diagnosis_in_FC.csv 
+Total genes after cleanup: 50588 
+Significant genes for ORA (padj < 0.05 and |log2FC| > 1): 18 
+Mapped significant Entrez IDs: 12 
+Mapped background Entrez IDs: 31141 
+Genes in GSEA ranked list: 31141 
+
+ORA GO terms: 83 
+ORA KEGG terms: 0 
+GSEA GO terms: 1335 
+GSEA KEGG terms: 173 

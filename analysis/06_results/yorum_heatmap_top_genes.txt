@@ -1,0 +1,11 @@
+Bu heatmap, en anlamlı diferansiyel eksprese genlerin örnekler arasındaki ekspresyon desenlerini göstermektedir.
+
+Renkler genlerin göreceli ekspresyon düzeylerini temsil eder. Kırmızı tonlar yüksek ekspresyonu, mavi tonlar düşük ekspresyonu gösterir.
+
+Örneklerin üstteki anotasyonlarında beyin bölgesi ve tanı bilgisi verilmiştir.
+
+Heatmap’te örneklerin özellikle beyin bölgesine göre kümelendiği görülmektedir. Bu, frontal cortex ve cerebellum arasında belirgin transkripsiyonel farklar olduğunu destekler.
+
+Bazı gen gruplarının Alzheimer ve kontrol örneklerinde farklı ekspresyon desenleri göstermesi, hastalıkla ilişkili genetik değişikliklerin varlığını desteklemektedir.
+
+Bu grafik, diferansiyel ekspresyon analizinin görsel olarak doğrulanmasına katkı sağlar.
