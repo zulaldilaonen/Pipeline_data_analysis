@@ -1,6 +1,12 @@
-# RNA-Seq Analysis Pipeline (Single Sample)
+# Pipeline_data_analysis
 
-This repository contains a reproducible RNA-Seq analysis workflow for a paired-end human sample (example: SRR14513977).
+## Overview
+
+This repository contains a reproducible RNA-seq analysis workflow developed for the thesis project:
+
+**Regional Transcriptomic Differences Between the Frontal Cortex and Cerebellum in Alzheimer's Disease**
+
+The workflow was developed using the GEO dataset GSE174367 and includes quality control, trimming, alignment, quantification, differential expression analysis, and functional enrichment.
 
 The pipeline performs:
 
@@ -14,7 +20,9 @@ The pipeline performs:
 Reference Genome: GRCh38 (Primary Assembly)  
 Annotation: GENCODE v45  
 
-<img width="575" height="975" alt="image" src="https://github.com/user-attachments/assets/0f3e48c5-dff9-475d-9dbc-9c3bb92e90be" />
+<p align="center">
+  <img src="pipeline_workflow.png" width="900">
+</p>
 
 ---
 
@@ -250,3 +258,18 @@ Notes:
 
  - if you want to run one sample to analyze, you must run pipeline.sh
  - if you want to run all of sample to analyze, you must run run_all_sample.sh
+
+
+## Data Availability
+
+Due to GitHub file-size limitations, large output files, count matrices, and supplementary analysis results are available through the following Google Drive archive:
+
+https://drive.google.com/drive/folders/1fDauoQ5a0MwuXPGUGhiRymZHdVmwjsDu
+
+## Author
+
+Zülal Dila Önen
+
+Department of Molecular Biology and Genetics
+
+Istanbul Medeniyet University
