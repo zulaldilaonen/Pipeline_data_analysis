@@ -20,9 +20,7 @@ The pipeline performs:
 Reference Genome: GRCh38 (Primary Assembly)  
 Annotation: GENCODE v45  
 
-<p align="center">
-  <img src="pipeline_workflow.png" width="900">
-</p>
+<img width="575" height="975" alt="image" src="https://github.com/user-attachments/assets/acba1998-bb70-42ff-acc6-d39ac2158feb" />
 
 ---
 
